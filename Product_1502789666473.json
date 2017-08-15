@@ -1,90 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.2",
+    "version": "1.0",
     "title": "Product",
-    "x-lastModified": "Aug 15, 2017 02:57AM PST",
-    "description": "Main Acme Inc Product API"
+    "x-lastModified": "Aug 15, 2017 08:25AM PST",
+    "description": "Acme Inc Main Product Catalogue"
   },
   "paths": {
-    "/products/{productid}": {
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success response",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            },
-            "examples": {
-              "application/json": {
-                "id": 1,
-                "name": "A green door",
-                "description": "a door that is green",
-                "price": 12.5,
-                "tags": [
-                  "home",
-                  "green",
-                  "doors"
-                ]
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "productid",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string",
-            "format": ""
-          }
-        ],
-        "operationId": "getProducts_productid",
-        "summary": "Individual product query",
-        "description": "Get a product based on it's product ID"
-      },
-      "put": {
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success response",
-            "schema": {
-              "type": "string"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "productid",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string",
-            "format": ""
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
-          }
-        ],
-        "operationId": "putProducts_productid",
-        "consumes": [
-          "application/json"
-        ],
-        "summary": "Update a new Product",
-        "description": "Update a product"
-      }
-    },
     "/products": {
       "get": {
         "produces": [
@@ -94,7 +16,7 @@
           "200": {
             "description": "Success response",
             "schema": {
-              "$ref": "#/definitions/Products"
+              "$ref": "#/definitions/ProductList"
             },
             "examples": {
               "application/json": [
@@ -126,25 +48,24 @@
         },
         "parameters": [
           {
-            "name": "productname",
+            "name": "name",
             "in": "query",
-            "description": "Product Name for name search",
+            "description": "",
             "required": false,
             "type": "string",
             "format": ""
           },
           {
-            "name": "productdesc",
+            "name": "description",
             "in": "query",
-            "description": "Description for Description Search",
+            "description": "",
             "required": false,
             "type": "string",
             "format": ""
           }
         ],
         "operationId": "getProducts",
-        "summary": "Product List. List all products, or perform search based on name or description",
-        "description": "Get back a list of products, Search based on product Name or Description"
+        "summary": "Get a list of products. Filter with query parms"
       },
       "post": {
         "produces": [
@@ -152,13 +73,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Success response",
+            "description": "Created",
             "schema": {
               "type": "string"
             }
           },
           "409": {
-            "description": "Create failed",
+            "description": "Create Failed",
             "schema": {
               "type": "string"
             }
@@ -178,41 +99,62 @@
         "consumes": [
           "application/json"
         ],
-        "summary": "Create a new instance of a product",
-        "description": "Add's a new product to the product catalog"
+        "summary": "Create a new product"
+      }
+    },
+    "/products/{productid}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productid",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          }
+        ],
+        "operationId": "getProducts_productid"
+      },
+      "put": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productid",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          }
+        ],
+        "operationId": "putProducts_productid"
       }
     }
   },
   "definitions": {
-    "Product": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "default": 1
-        },
-        "name": {
-          "type": "string",
-          "default": "A green door"
-        },
-        "description": {
-          "type": "string",
-          "default": "a door that is green"
-        },
-        "price": {
-          "type": "number",
-          "default": 12.5
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "default": "doors"
-          }
-        }
-      }
-    },
-    "Products": {
+    "ProductList": {
       "type": "array",
       "items": {
         "type": "object",
@@ -243,12 +185,31 @@
         }
       }
     },
-    "ProductCreated": {
+    "Product": {
       "type": "object",
       "properties": {
-        "message": {
+        "id": {
+          "type": "integer",
+          "default": 1
+        },
+        "name": {
           "type": "string",
-          "default": "Product Created"
+          "default": "A green door"
+        },
+        "description": {
+          "type": "string",
+          "default": "a door that is green"
+        },
+        "price": {
+          "type": "number",
+          "default": 12.5
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "default": "doors"
+          }
         }
       }
     }
