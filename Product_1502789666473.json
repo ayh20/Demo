@@ -155,18 +155,12 @@
             "description": "Success response",
             "schema": {
               "type": "string"
-            },
-            "examples": {
-              "application/json": "{\n  \"message\": \"Product Created\"\n}"
             }
           },
           "409": {
             "description": "Create failed",
             "schema": {
               "type": "string"
-            },
-            "examples": {
-              "application/json": "\"There was an Error\""
             }
           }
         },
