@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0",
+    "version": "1.2",
     "title": "Product",
-    "x-lastModified": "Aug 14, 2017 09:54AM PST",
+    "x-lastModified": "Aug 15, 2017 02:57AM PST",
     "description": "Main Acme Inc Product API"
   },
   "paths": {
@@ -81,7 +81,7 @@
         "consumes": [
           "application/json"
         ],
-        "summary": "Create a new Product",
+        "summary": "Update a new Product",
         "description": "Update a product"
       }
     },
